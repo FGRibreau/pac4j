@@ -66,7 +66,8 @@ public class FacebookAttributesDefinition extends OAuthAttributesDefinition {
     public static final String GROUPS = "groups";
     public static final String MUSIC_LISTENS = "music.listens";
     public static final String PICTURE = "picture";
-    
+    public static final String PAGES = "pages";
+
     public FacebookAttributesDefinition() {
         final String[] names = new String[] {
             NAME, FIRST_NAME, MIDDLE_NAME, LAST_NAME, LINK, USERNAME, THIRD_PARTY_ID, BIO, EMAIL, POLITICAL, QUOTES,
@@ -99,6 +100,7 @@ public class FacebookAttributesDefinition extends OAuthAttributesDefinition {
         addAttribute(ALBUMS, FacebookConverters.listPhotoConverter, false);
         addAttribute(EVENTS, FacebookConverters.listEventConverter, false);
         addAttribute(GROUPS, FacebookConverters.listGroupConverter, false);
+        addAttribute(PAGES, FacebookConverters.listPageConverter, false);
         addAttribute(MUSIC_LISTENS, FacebookConverters.listMusicListensConverter, false);
         addAttribute(PICTURE, FacebookConverters.pictureConverter, false);
     }

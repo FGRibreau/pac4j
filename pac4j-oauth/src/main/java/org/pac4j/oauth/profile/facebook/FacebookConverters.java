@@ -51,6 +51,9 @@ public final class FacebookConverters {
     
     public final static JsonListConverter listGroupConverter = new JsonListConverter(FacebookGroup.class);
     
+
+    public final static JsonListConverter listPageConverter = new JsonListConverter(FacebookPage.class);
+
     public final static DateConverter eventDateConverter = new DateConverter("yyyy-MM-dd'T'HH:mm:ss");
     
     public final static JsonObjectConverter applicationConverter = new JsonObjectConverter(FacebookApplication.class);

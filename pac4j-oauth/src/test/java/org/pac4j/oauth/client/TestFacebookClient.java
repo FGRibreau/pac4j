@@ -26,19 +26,7 @@ import org.pac4j.core.profile.ProfileHelper;
 import org.pac4j.core.profile.UserProfile;
 import org.pac4j.core.util.TestsHelper;
 import org.pac4j.oauth.profile.JsonList;
-import org.pac4j.oauth.profile.facebook.FacebookApplication;
-import org.pac4j.oauth.profile.facebook.FacebookEducation;
-import org.pac4j.oauth.profile.facebook.FacebookEvent;
-import org.pac4j.oauth.profile.facebook.FacebookGroup;
-import org.pac4j.oauth.profile.facebook.FacebookInfo;
-import org.pac4j.oauth.profile.facebook.FacebookMusicData;
-import org.pac4j.oauth.profile.facebook.FacebookMusicListen;
-import org.pac4j.oauth.profile.facebook.FacebookObject;
-import org.pac4j.oauth.profile.facebook.FacebookPhoto;
-import org.pac4j.oauth.profile.facebook.FacebookPicture;
-import org.pac4j.oauth.profile.facebook.FacebookProfile;
-import org.pac4j.oauth.profile.facebook.FacebookRelationshipStatus;
-import org.pac4j.oauth.profile.facebook.FacebookWork;
+import org.pac4j.oauth.profile.facebook.*;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -49,12 +37,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 /**
  * This class tests the {@link FacebookClient} class by simulating a complete authentication.
- * 
+ *
  * @author Jerome Leleu
  * @since 1.0.0
  */
 public class TestFacebookClient extends TestOAuthClient {
-    
+
     @Override
     public void testClone() {
         final FacebookClient oldClient = new FacebookClient();
@@ -66,13 +54,13 @@ public class TestFacebookClient extends TestOAuthClient {
         assertEquals(oldClient.getFields(), client.getFields());
         assertEquals(oldClient.getLimit(), client.getLimit());
     }
-    
+
     public void testMissingFields() {
         final FacebookClient client = (FacebookClient) getClient();
         client.setFields(null);
         TestsHelper.initShouldFail(client, "fields cannot be blank");
     }
-    
+
     @SuppressWarnings("rawtypes")
     @Override
     protected Client getClient() {
@@ -87,7 +75,7 @@ public class TestFacebookClient extends TestOAuthClient {
         facebookClient.setLimit(100);
         return facebookClient;
     }
-    
+
     @Override
     protected String getCallbackUrl(final HtmlPage authorizationPage) throws Exception {
         final HtmlForm form = authorizationPage.getForms().get(0);
@@ -101,7 +89,7 @@ public class TestFacebookClient extends TestOAuthClient {
         logger.debug("callbackUrl : {}", callbackUrl);
         return callbackUrl;
     }
-    
+
     @Override
     protected void registerForKryo(final Kryo kryo) {
         kryo.register(FacebookProfile.class);
@@ -118,8 +106,9 @@ public class TestFacebookClient extends TestOAuthClient {
         kryo.register(FacebookWork.class);
         kryo.register(FacebookPicture.class);
         kryo.register(FacebookPhoto.class);
+        kryo.register(FacebookPage.class);
     }
-    
+
     @Override
     protected void verifyProfile(final UserProfile userProfile) {
         final FacebookProfile profile = (FacebookProfile) userProfile;
@@ -239,6 +228,8 @@ public class TestFacebookClient extends TestOAuthClient {
         assertEquals(1, group.getBookmarkOrder().intValue());
         final List<FacebookMusicListen> musicListens = profile.getMusicListens();
         assertEquals(4, musicListens.size());
+        final List<FacebookPage> pages = profile.getPages();
+        assertEquals(4, pages.size());
         final FacebookPicture picture = profile.getPicture();
         assertFalse(picture.getIsSilhouette());
         assertEquals(36, profile.getAttributes().size());

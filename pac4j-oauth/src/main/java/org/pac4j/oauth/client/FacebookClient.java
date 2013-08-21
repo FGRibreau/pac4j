@@ -184,6 +184,7 @@ public class FacebookClient extends BaseOAuth20Client<FacebookProfile> {
             extractData(profile, json, FacebookAttributesDefinition.GROUPS);
             extractData(profile, json, FacebookAttributesDefinition.MUSIC_LISTENS);
             extractData(profile, json, FacebookAttributesDefinition.PICTURE);
+            extractData(profile, json, FacebookAttributesDefinition.PAGES);
         }
         return profile;
     }

@@ -369,7 +369,11 @@ public class FacebookProfile extends OAuth20Profile {
     public List<FacebookMusicListen> getMusicListens() {
         return (List<FacebookMusicListen>) getAttribute(FacebookAttributesDefinition.MUSIC_LISTENS);
     }
-    
+
+    public List<FacebookPage> getPages() {
+        return (List<FacebookPage>) getAttribute(FacebookAttributesDefinition.PAGES);
+    }
+
     public FacebookPicture getPicture() {
         return (FacebookPicture) getAttribute(FacebookAttributesDefinition.PICTURE);
     }
